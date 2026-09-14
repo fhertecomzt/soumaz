@@ -1,0 +1,942 @@
+:root {
+  --color_sky: #0094fd;
+  --btn_cancelar: #d36060;
+}
+*{
+  font-family: "Arial";
+}
+
+.containerr {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 60px;
+  margin-bottom: 5px;
+  padding: 1px 5px;
+}
+.container_dashboard_tablas {
+  background-color: #e7e7e7;
+  border-radius: 10px;
+  box-shadow: 2px 3px 3px rgba(0, 0, 0, 0.5);
+  min-height: 70vh;
+  left: 16px;
+  position: absolute;
+  top: 167px;
+  transition: 0.4s;
+  width: calc(100% - 30px);
+}
+.boton,
+.btn_movimientos {
+  width: 88px;
+  height: 43px;
+}
+.boton,
+.btn_movimientos {
+  background: var(--color_sky);
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  margin: 8px;
+}
+.boton:hover,
+.btn_movimientos:hover {
+  background: #7c52f0;
+}
+.buscarlabel {
+  align-items: center;
+  color: #2c3e50;
+  display: flex;
+  font-size: 20px;
+  margin-left: 30px;
+  text-align: center;
+}
+.buscar--box {
+  align-items: center;
+  border-radius: 15px;
+  color: rgba(113, 99, 186, 255);
+  display: flex;
+  font-size: 15px;
+  gap: 5px;
+  height: 60%;
+  margin: 10px;
+  margin-left: 15px;
+  padding: 5px 10px;
+}
+.buscar--box:focus {
+  border: solid 1px var(--color_sky);
+}
+
+.search--box input {
+  background: transparent;
+  padding: 10px;
+}
+.search--box i {
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.5s ease-out;
+}
+.search--box i:hover {
+  transform: scale(1.2);
+}
+
+.container {
+  width: 100%;
+  padding: 25px 30px;
+  background-color: #ffff;
+  border-radius: 5px;
+}
+.container .tittle {
+  font-size: 25px;
+  font-weight: 500;
+}
+.container form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 10px 12px 0;
+}
+form .form-group {
+  margin-bottom: 2px;
+  /*width: calc(100% / 1 - 10px);*/
+  width: 100%;
+}
+form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-top: 5px;
+}
+.form-group input,
+select {
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  font-size: 12px;
+  height: 30px;
+  outline: none;
+  padding-left: 15px;
+  transition: 0.3s ease;
+  width: 94%;
+}
+.form-group input:focus,
+.form-group input:valid {
+  border-color: var(--color_sky);
+}
+/*Para validaciones en tiempo real*/
+.form-group .crearNameIcon {
+  color: #888;
+  font-size: 20px;
+  position: absolute;
+  right: 39%;
+  transform: translateY(17%);
+}
+
+/*Hacer que noexterior e interior queden en la misma fila*/
+.form-containernum {
+  display: flex;
+  gap: 20px; /* Espaciado entre los inputs */
+  align-items: center; /* Alineación vertical */
+  flex-wrap: wrap; /* Permite que se acomoden en pantallas pequeñas */
+}
+
+.ladoble {
+  display: flex;
+  flex-direction: column; /* Mantiene el label encima del input */
+  width: calc(100% / 2 - 15px) !important;
+}
+.laquinta {
+  display: flex;
+  flex-direction: column; /* Mantiene el label encima del input */
+  width: calc(100% / 5 - 19px);
+}
+
+/* Estilo general del modal */
+.modal {
+  display: none; /* Ocultar por defecto */
+  position: fixed; /* Posicionarlo encima del contenido */
+  z-index: 1000; /* Asegurarse de que esté por encima de otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ocupa todo el ancho de la pantalla */
+  height: 100%; /* Ocupa todo el alto de la pantalla */
+  overflow: auto; /* Habilitar scroll si es necesario */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: #fff; /* Fondo blanco */
+  margin: auto auto; /* Centrarse vertical y horizontalmente */
+  padding: 15px;
+  border: 1px solid #888;
+  width: 25%; /* Ancho del modal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+.modal-contentProductos,
+.modal-contentUsuarios,
+.modal-contentUsuariosSup {
+  background-color: #fff; /* Fondo blanco */
+  margin: auto auto; /* Centrarse vertical y horizontalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 510px; /* Ancho del modal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+.modal .tittle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Botón de cierre */
+.close {
+  background-color: #ebedf0;
+  border-radius: 100%;
+  color: #aaaaaaf0;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  height: 24px;
+  text-align: center;
+  width: 24px;
+}
+
+.close:hover,
+.close:focus {
+  background-color: #ff0000;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* Opcional: Botones dentro del modal */
+.modal button {
+  background-color: var(--color_sky);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 10px 20px;
+}
+
+.modal button:hover {
+  background-color: #45a049; /* Verde oscuro */
+}
+
+.input-error {
+  border-color: red !important;
+  outline: none; /* Opcional: quita el borde azul al enfocar */
+}
+
+.input-error:focus {
+  outline: none;
+  box-shadow: 0 0 5px red;
+}
+/* Checkbox caracteristicas*/
+.caracteristicas-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espacio entre checkboxes */
+  margin-top: 5px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  gap: 5px; /* Espacio entre checkbox y texto */
+  font-weight: 450;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+}
+
+/* Botón de cancelar */
+.cancelarModal {
+  background-color: var(--btn_cancelar);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin-top: 8px;
+  padding: 10px 20px;
+}
+
+.cancelarModal:hover,
+.cancelarModal:focus {
+  background-color: #ff0000;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/*Aquí esta el contenedor de ventas "Contenedor" ****************************/
+.container_ventas {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  margin: 6px 1px;
+  padding: 5px 15px;
+  width: 100%;
+  /*Oculto lo que queda afuera del contenedor*/
+  contain: paint;
+}
+.container_ventas .element {
+  /*Contenedor de los item principal "contenedor items" */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  grid-gap: 12px;
+  grid-row-gap: 12px;
+  margin-top: 30px;
+  transition: 0.9s;
+  width: 70%;
+}
+.container_ventas .element .item {
+  align-items: center;
+  background-color: white;
+  border: 1px solid #dfdfdf;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  max-width: 186px;
+  max-height: 245px;
+  text-align: center;
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 11px;
+}
+.container_ventas .item:hover {
+  box-shadow: 0 0 10px #2196f3;
+}
+.element .item .img-item {
+  height: 60px;
+  margin-top: auto; /* Empuja el botón hacia la parte inferior */
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+.container_ventas .item .titulo-item {
+  color: #000;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+.container_ventas .item .precio-item {
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: auto; /* Empuja el botón hacia la parte inferior */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container_ventas .item .boton-item {
+  display: block;
+  margin: 10px auto;
+  border: none;
+  background-color: black;
+  color: #fff;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container_ventas .item .bton-add {
+  margin-top: auto; /* Empuja el botón hacia la parte inferior */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.container_ventas .item .boton-item:hover {
+  background-color: #5fb3ef;
+}
+
+/*Seccion carrito********************************/
+.carrito {
+  border: 1px solid #dfdfdf;
+  width: 32%;
+  margin-top: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: auto;
+
+  margin-left: 1px;
+  position: sticky !important;
+  top: 0;
+  transition: 0.3s;
+}
+.carrito-items {
+  max-height: 300px; /* Ajusta la altura máxima antes de que aparezca el scroll */
+  overflow-y: auto; /* Activa el scroll cuando haya más elementos */
+  padding-right: 10px; /* Evita que el contenido se corte con el scroll */
+}
+.carrito .header-carrito {
+  background-color: #2196f3;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  display: flex;
+}
+.header-carrito-detalle {
+  text-align: center;
+  margin: auto;
+  font-size: 23px;
+}
+.header-carrito-detalle i {
+  color: #000000;
+}
+/*Notificaciones de carrito*/
+.badge-danger {
+  background-color: red;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 11px;
+  padding: 1px 4px;
+}
+.imagen-carrito {
+  position: relative;
+  display: inline-block;
+  margin-top: 18px;
+  text-align: center;
+  margin-right: 25px;
+}
+.contador {
+  font-weight: 400;
+  position: absolute;
+  top: -8px;
+  right: -14px;
+}
+.carrito .carrito-item {
+  color: #000;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #dfdfdf;
+  padding: 5px;
+  margin-left: 12px;
+}
+.carrito .carrito-item img {
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+}
+.carrito .carrito-item .carrito-item-titulo {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #000;
+}
+.carrito .carrito-item .selector-cantidad {
+  display: inline-block;
+  margin-right: 25px;
+}
+.carrito .carrito-item .carrito-item-cantidad {
+  border: none;
+  font-size: 18px;
+  background: transparent;
+  display: inline-block;
+  width: 30px;
+  padding: 5px;
+  text-align: center;
+}
+.carrito .carrito-item .selector-cantidad i {
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+}
+.carrito .carrito-item .selector-cantidad .restar-cantidad:hover {
+  background: red;
+  color: white;
+  border: none;
+}
+.carrito .carrito-item .selector-cantidad .sumar-cantidad:hover {
+  background: green;
+  color: white;
+  border: none;
+}
+.carrito .carrito-item .carrito-item-precio {
+  color: #000;
+
+  font-weight: bold;
+  display: inline-block;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.carrito .carrito-item .btn-eliminar {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #dfdfdf;
+  cursor: pointer;
+  display: block;
+  background-color: transparent;
+  z-index: 20;
+}
+.carrito .carrito-item .btn-eliminar:hover {
+  color: white;
+  background: red;
+  border: none;
+}
+.carrito .carrito-item .btn-eliminar {
+  pointer-events: auto;
+}
+.carrito-total {
+  background-color: #f3f3f3;
+  padding: 30px;
+}
+.carrito-precio-total {
+  color: #000;
+}
+.carrito-total .fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.carrito-total .btn-pagar {
+  display: block;
+  width: 100%;
+  border: none;
+  background: #2196f3;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 25px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: auto;
+}
+.carrito-total .btn-pagar:hover {
+  background: #4caf50;
+  scale: 1.05;
+}
+
+.mensajevacio {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
+/*Modulo Operaciones*/
+/*Movimientos*/
+.menu-movimientosm {
+  display: flex;
+}
+
+.menu-movimientos button {
+  padding: 10px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+#mensajem {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.mensaje-exitom {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.mensaje-errorm {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+.btn_movimientossave,
+.btn_movimientosdelete {
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  outline: none;
+  margin: 8px;
+  width: 88px;
+  height: 43px;
+}
+.btn_movimientossave {
+  background: #0aa629;
+}
+.btn_movimientosdelete {
+  background-color: #d33;
+}
+.btn_movimientossave:hover,
+.btn_movimientosdelete:hover {
+  background-color: #7c52f0;
+}
+.lostraspasospendientes {
+  margin-left: 20px;
+  margin-bottom: 25px;
+}
+.formulario-movimiento {
+  color: #7c52f0 !important;
+  text-align: center;
+  margin-bottom: 15px;
+}
+#lista-traspasos-pendientes {
+  color: #d33;
+}
+
+/*Etiquetas*/
+.container_etiquetas {
+  background-color: #ffff;
+  border-radius: 5px;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.5);
+  min-height: 73vh;
+  padding: 25px 30px;
+  width: 100%;
+}
+.container_etiquetas h3 {
+  color: #7c52f0;
+  padding: 10px;
+  width: 97%;
+  margin: auto;
+}
+.container_etiquetas label {
+  display: inline;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.container_etiquetas button {
+  background-color: #5fb3ef;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  height: 70%;
+  outline: none;
+  margin: 8px;
+  padding: 5px;
+  width: 11%;
+}
+.container_etiquetas input {
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 7px;
+  margin-right: 15px;
+}
+.container_etiquetas button:hover {
+  background: #7c52f0;
+}
+/*Modal ventas*/
+#resumen-compra {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+#cambio {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.lista-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000; /* Para que flote encima de todo */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lista-autocomplete li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.lista-autocomplete li:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+/* Estilos cuando el modo oscuro está activado ***************************/
+
+.darkmode .buscar--box {
+  background-color: rgb(193, 193, 193);
+}
+.darkmode .container_dashboard_tablas {
+  background: #2f2f31 !important;
+}
+.darkmode .container_dashboard_tablas h3 {
+  color: #987fa1 !important;
+}
+.darkmode .boton {
+  background-color: #5890b7;
+}
+.darkmode .boton:hover {
+  background-color: #9316c0;
+}
+.darkmode label.buscarlabel {
+  color: #deb2ed;
+}
+.darkmode .containerr {
+  background: #444446 !important;
+}
+.darkmode .mensajevacio {
+  color: #e77575;
+}
+
+.darkmode .modal-content,
+.darkmode .modal-contentProductos,
+.darkmode .modal-contentUsuarios,
+.darkmode .modal-contentPerfilUsuario,
+.darkmode .swal2-container,
+.darkmode .imagen-preview-container {
+  background-color: #444446;
+  color: white;
+}
+/*Modulo operaciones*/
+.darkmode .container_etiquetas {
+  background-color: #2f2f31 !important;
+  color: white;
+}
+/*Modulo ventas*/
+.darkmode .container_ventas {
+  background-color: #2f2f31 !important;
+}
+.darkmode .carrito-items {
+  background-color: #444446 !important;
+}
+.darkmode .container_ventas .element .item {
+  background-color: #dbdbdb;
+}
+.darkmode .container_ventas .item:hover {
+  box-shadow: 0 0 18px #00eaff;
+}
+.darkmode .carrito .carrito-item .carrito-item-titulo {
+  color: #e5e5e5;
+}
+.darkmode .carrito .carrito-item .carrito-item-cantidad {
+  color: #e5e5e5;
+}
+.darkmode .carrito .carrito-item .carrito-item-precio {
+  color: #e5e5e5;
+}
+.darkmode .carrito-total {
+  background-color: #a1a1a1;
+}
+.darkmode .carrito .header-carrito {
+  background-color: #7b90a1;
+}
+.darkmode .carrito-total .btn-pagar {
+  background: #5d84a4;
+}
+.darkmode .carrito-total .btn-pagar:hover {
+  background: #2f9a2a;
+}
+.darkmode h2 {
+  color: #a667bc;
+}
+
+/* MODAL DE ÓRDENES Y SISTEMA DE GRIDS (COLUMNAS)*/
+
+/* Hacemos el modal de órdenes más ancho para que quepan las columnas */
+.modal-contentOrdenes {
+  background-color: #fff;
+  margin: 3% auto; /* Un poco más arriba para que no estorbe */
+  padding: 25px;
+  border: 1px solid #888;
+  width: 75%; /* Más ancho que los catálogos normales */
+  max-width: 1100px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  max-height: 90vh; /* Máximo el 90% de la pantalla */
+  overflow-y: auto; /* Scroll interno solo si la pantalla es enana */
+}
+
+/* Rejilla de 3 columnas para la parte superior (Cliente, Equipo, Recepción) */
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+/* Rejilla de 2 columnas para la parte inferior (Diagnóstico, Costos) */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* La primera columna un poco más ancha */
+  gap: 20px;
+}
+
+/* Tarjetas o "Cajones" para separar visualmente cada sección */
+.seccion-form {
+  background-color: #f8f9fa; /* Gris super clarito */
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+/* Títulos de cada cajón (Ej: "1. Cliente") */
+.seccion-form h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--color_sky);
+  border-bottom: 2px solid var(--color_sky);
+  padding-bottom: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* Corrección de altura para textareas en las órdenes */
+.seccion-form textarea {
+  width: 94%;
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 12px;
+  resize: vertical; /* Permite estirar hacia abajo */
+  outline: none;
+}
+.seccion-form textarea:focus {
+  border-color: var(--color_sky);
+}
+
+/* --- ADAPTACIÓN AL MODO OSCURO --- */
+.darkmode .modal-contentOrdenes {
+  background-color: #444446;
+  color: white;
+  border-color: #555;
+}
+.darkmode .seccion-form {
+  background-color: #3b3b3d;
+  border-color: #4a4a4c;
+}
+.darkmode .seccion-form h4 {
+  color: #deb2ed; /* Morado del dark mode */
+  border-bottom-color: #deb2ed;
+}
+.darkmode .seccion-form textarea {
+  background-color: #555;
+  color: white;
+  border-color: #777;
+}
+
+/* Modal grande para formularios de 2 columnas (Talleres, Usuarios, Productos) */
+.modal-content-lg {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 25px;
+  border: 1px solid #888;
+  width: 65%; /* Más ancho que el normal, menos que el de órdenes */
+  max-width: 900px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.darkmode .modal-content-lg {
+  background-color: #444446;
+  color: white;
+  border-color: #555;
+}
+
+@media screen and (max-width: 900px) {
+  .modal-content-lg {
+    height: 500px;
+    width: 95%;
+  }
+}
+
+/* Opcional: Ajustar para pantallas más pequeñas */
+@media screen and (max-width: 850px) {
+  .container_ventas {
+    display: block;
+  }
+  .element {
+    width: 100% !important;
+  }
+  .carrito {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .boton {
+    margin-top: auto;
+    width: 75px;
+  }
+  .buscarlabel {
+    font-size: 15px;
+  }
+  .buscar--box {
+    height: 35px;
+    margin: 5px;
+    width: 50%;
+  }
+  .modal-content {
+    width: 45%;
+  }
+}
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%; /* Ajustar el ancho para pantallas pequeñas */
+  }
+}
+
+@media screen and (max-width: 900px) {
+  /* En tablets o celulares rompemos las columnas a 1 sola */
+  .form-grid-3, 
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .modal-contentOrdenes {
+    width: 95%; /* Que ocupe casi toda la pantalla en móvil */
+  }
+}

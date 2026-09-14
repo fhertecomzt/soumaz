@@ -1,0 +1,125 @@
+/* =========================================================
+   1. ESTILOS VISUALES DE ETIQUETA EN PANTALLA (MODAL)
+   ========================================================= */
+.etiqueta-anaquel {
+  border: 1px dashed #cbd5e1;
+  background: #ffffff;
+  color: #000000;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2mm;
+}
+
+/* MEDIDAS FÍSICAS ESTÁNDAR (4cm x 4cm) */
+.etq-4x4 {
+  width: 40mm;
+  height: 40mm;
+}
+.etq-4x4 .etq-tienda { font-size: 7pt; font-weight: bold; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+.etq-4x4 .etq-producto { font-size: 8pt; font-weight: bold; line-height: 1.1; height: 22px; overflow: hidden; color: #000; margin: 2px 0; }
+.etq-4x4 .etq-precio-gran { font-size: 14pt; font-weight: 900; color: #000; display: block; }
+.etq-4x4 .etq-promo-box { background: #000; color: #fff; font-size: 6.5pt; font-weight: bold; padding: 1px 5px; border-radius: 8px; display: inline-block; margin-top: 2px; }
+.etq-4x4 .etq-codigo { font-size: 6pt; color: #333; font-weight: bold; letter-spacing: 1px; }
+.etq-4x4 canvas { width: 70px !important; height: 70px !important; margin: 2px auto !important; display: block; }
+
+/* MEDIDAS FÍSICAS CHICAS (2cm x 2cm - Miniaturizado al extremo) */
+.etq-2x2 {
+  width: 20mm;
+  height: 20mm;
+  padding: 1mm;
+}
+.etq-2x2 .etq-tienda { display: none; } /* En 2cm se oculta el nombre para ganar espacio */
+.etq-2x2 .etq-producto { font-size: 5pt; font-weight: bold; line-height: 1; height: 12px; overflow: hidden; margin: 0; color: #000; }
+.etq-2x2 .etq-precio-gran { font-size: 8pt; font-weight: 900; line-height: 1; color: #000; display: block; }
+.etq-2x2 .etq-promo-box { display: none !important; } /* En 2cm no cabe la pastilla negra */
+.etq-2x2 .etq-codigo { font-size: 4.5pt; letter-spacing: 0; margin: 0; color: #333; font-weight: bold; }
+.etq-2x2 canvas { width: 35px !important; height: 35px !important; margin: 1px auto !important; display: block; }
+
+/* OCULTAR EL LIENZO MASIVO EN LA PANTALLA DE LA PC */
+#lienzo-impresion-masiva {
+  display: none;
+}
+
+/* =========================================================
+   2. REGLAS ÚNICAS DE IMPRESIÓN MASIVA (@media print)
+   ========================================================= */
+@media print {
+  /* Al poner el margen de página en 0, Chrome/Edge apaga los encabezados de fecha/URL */
+  @page {
+    size: auto;
+    margin: 0mm !important; 
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  /* Ocultamos absolutamente todo el sistema SWAOS */
+  body * { 
+    visibility: hidden !important; 
+  }
+  
+  /* Apagamos el modal y su vista previa individual para que no se cuelen */
+  #modal-etiqueta-qr, 
+  #modal-etiqueta-qr *,
+  #area-impresion-etiqueta,
+  #area-impresion-etiqueta * { 
+    display: none !important; 
+    visibility: hidden !important; 
+  }
+  
+  /* Hacemos visible ÚNICAMENTE el lienzo masivo y sus etiquetas generadas */
+  #lienzo-impresion-masiva, 
+  #lienzo-impresion-masiva * { 
+    visibility: visible !important; 
+  }
+  
+  /* Posicionamos el lienzo masivo en la coordenada (0,0) exacta */
+  #lienzo-impresion-masiva {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-content: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 2mm !important;
+    
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    padding: 4mm !important; /* Margen de seguridad para rodillos de impresora */
+    box-sizing: border-box !important;
+  }
+
+  /* ANCHOS DE PAPEL */
+  #lienzo-impresion-masiva.papel-58mm { width: 48mm; max-width: 48mm; padding: 1mm !important; }
+  #lienzo-impresion-masiva.papel-80mm { width: 72mm; max-width: 72mm; padding: 2mm !important; }
+  #lienzo-impresion-masiva.papel-carta { width: 100%; max-width: 210mm; }
+
+  /* REGLAS PARA TAMAÑO 2X2 EN MINIPRINTERS */
+  #lienzo-impresion-masiva.papel-58mm .etq-2x2 {
+    width: 22mm !important;
+    max-width: 22mm !important;
+    flex: 0 0 46% !important;
+  }
+  
+  #lienzo-impresion-masiva.papel-80mm .etq-2x2 {
+    width: 22mm !important;
+    flex: 0 0 31% !important;
+  }
+
+  /* Borde tenue de guía para recortar */
+  #lienzo-impresion-masiva .etiqueta-anaquel {
+    border: 1px dotted #999 !important; 
+  }
+}
