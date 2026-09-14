@@ -1,4 +1,4 @@
 .DS_Store
 php/conexion.php
-php/config_keys.php
-php/config_correo.php
+/swaos/php/config_keys.php
+swaos/php/config_correo.php
